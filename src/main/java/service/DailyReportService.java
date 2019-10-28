@@ -25,24 +25,24 @@ public class DailyReportService {
     }
 
     public List<DailyReport> getAllDailyReports() {
-        return getDRDao().getAllDailyReport();
+        return getDailyReportDao().getAllDailyReport();
     }
 
 
     public DailyReport getLastReport() {
-        return getDRDao().getReport(getDRDao().getLastId() - 1);
+        return getDailyReportDao().getReport(getDailyReportDao().getLastId() - 1);
     }
 
     public DailyReport doReport() {
-        getDRDao().addNewReport();
-        return getDRDao().getReport(getDRDao().getLastId() - 1);
+        getDailyReportDao().addNewReport();
+        return getDailyReportDao().getReport(getDailyReportDao().getLastId() - 1);
     }
 
     public void cleanUp() {
-        getDRDao().dropTable();
+        getDailyReportDao().dropTable();
     }
 
-    private DailyReportDao getDRDao() {
+    private DailyReportDao getDailyReportDao() {
         return new DailyReportDao(sessionFactory.openSession());
     }
 }

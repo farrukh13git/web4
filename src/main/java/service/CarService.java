@@ -29,7 +29,7 @@ public class CarService {
         return getCarDao().getAllCars();
     }
 
-    public  boolean addCar(String brand, String model, String licensePlate, Long price) {
+    public boolean addCar(String brand, String model, String licensePlate, Long price) {
         if (!getCarDao().isExistsCar(licensePlate) &&
                 getCarDao().thisBrandCount(brand) < 10) {
             getCarDao().addCar(brand, model, licensePlate, price);
@@ -43,12 +43,12 @@ public class CarService {
             Long price = getCarDao().getPrice(licensePlate);
             Car car = getCarDao().getCar(licensePlate);
             getCarDao().deleteCar(car);
-            Long id = getDRDao().getLastId();
+            Long id = getDailyReportDao().getLastId();
             if (id == null) {
-                getDRDao().addNewReport();
-                id = getDRDao().getLastId();
+                getDailyReportDao().addNewReport();
+                id = getDailyReportDao().getLastId();
             }
-            getDRDao().addSoldCarReport(price, id);
+            getDailyReportDao().addSoldCarReport(price, id);
             return true;
         }
         return false;
@@ -62,7 +62,7 @@ public class CarService {
         return new CarDao(sessionFactory.openSession());
     }
 
-    private DailyReportDao getDRDao() {
+    private DailyReportDao getDailyReportDao() {
         return new DailyReportDao(sessionFactory.openSession());
     }
 }
