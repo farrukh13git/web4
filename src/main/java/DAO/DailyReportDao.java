@@ -15,7 +15,8 @@ public class DailyReportDao {
     public DailyReportDao(Session session) {
         this.session = session;
     }
-
+    
+    @SuppressWarnings("unchecked")
     public List<DailyReport> getAllDailyReport() {
         Transaction transaction = null;
         List<DailyReport> dailyReports;

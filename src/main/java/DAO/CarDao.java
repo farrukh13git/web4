@@ -16,6 +16,7 @@ public class CarDao {
         this.session = session;
     }
 
+    @SuppressWarnings("unchecked")
     public List<Car> getAllCars() {
         Transaction transaction = null;
         List<Car> list;
